@@ -104,20 +104,13 @@ public class Startup(IConfiguration configuration)
                         .AddKeyRotationDbContext(opt =>
                         {
                             var keyRotationDbConnectionString = Configuration.GetConnectionString("KeyRotationDb");
-                            opt.UseSqlServer(keyRotationDbConnectionString, c => c.MigrationsAssembly("Samples.KeyRotationWithEntityFramework"));
+                            opt.UseSqlServer(keyRotationDbConnectionString);
                         });
 
                     krBuilder.ConfigureKeyRotation(conf =>
                     {
                         conf.Licensee = "DEMO";
-                        conf.LicenseKey = "eyJhdXRoIjoiREVNTyIsImV4cCI6IjIwMjUtMDYtMDhUMDA6MDA6MDAiLCJpYXQiOiIyMDI1LTA1LTA4VDE0OjIzOjM2Iiwib3JnIjoiREVNTyIsImF1ZCI6NX0=.Y5XdVMzlXDr8HOYWnojqbzep/k2dyL9LH29Pe6WG6u0vnAs6w8S/jsvrBqoaSc//yJJVpTMSQwOOxI+7PeQmIQaUPmuJs4YQjdKtQZ7IcGvvRkV4m9dXElglBKtz3q9UztVNqxvoT/ly+qU6XM+qSUoYr4wpsfX+qH1vd0VQsAtref762FYofvTucLYO8egAndn486j0Xve2QLlgWY+9TxuZB0xRVemvQT+aPpRMz5vg/FAkhr0teNWUDTiX8VUXOf9BI9/lT2P/csO2gHqq2Qi33ujlyJ0fx5wyfywSdHm4ITYI0fXRFvHLbKh8CFQvUY2tzKKqvEieTu9sR5OFrexes9/WIWbjJZmaZcZU0WiUXgd0x2MM9jZz97y/m078fV8MW8dsJteav2+6xE+H1a3sSrEOZfHCU6DZUlYU0Yv+z078tF8Y9YPuEJhatrl/mHe8dtFgHgNH1btc3+uDexMmVi2i3uMoYqB/3Gczms2PkaPrA6Qd3uQY5N23CjsxIwdzAwwNFnERuchjPnJ4iY4IcMjWf9oBW3Lp7YCfkcH19fC/9U9rfN9OHcziPQPIOAT4j5jLxZWaM+6qsG3MjkGpVH9x2XLK1tfVZiFu3isBhdnCO3+VWLjNSLj3Kbju34j59AqWBeO2Fpt/65t2mW/5aiGB3pYQy846fi3uNn4=";
-
-                        conf.CheckInterval = Configuration.GetValue<int>("KRCheckInterval");
-                        Console.WriteLine($"####### CheckInterval: {conf.CheckInterval}");
-                        
-                        conf.KeyPublishTime = TimeSpan.FromSeconds(10);
-                        conf.KeyLifetime = TimeSpan.FromSeconds(40);
-                        conf.KeyRetirementTime = TimeSpan.FromSeconds(10);
+                        conf.LicenseKey = "***LicenseKey Here***";
                     });
                 });
             })
