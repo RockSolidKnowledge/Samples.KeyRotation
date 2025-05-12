@@ -104,7 +104,7 @@ public class Startup(IConfiguration configuration)
                         .AddKeyRotationDbContext(opt =>
                         {
                             var keyRotationDbConnectionString = Configuration.GetConnectionString("KeyRotationDb");
-                            opt.UseSqlServer(keyRotationDbConnectionString, c => c.MigrationsAssembly("Samples.KeyRotationWithEntityFramework"));
+                            opt.UseSqlServer(keyRotationDbConnectionString);
                         });
 
                     krBuilder.ConfigureKeyRotation(conf =>
