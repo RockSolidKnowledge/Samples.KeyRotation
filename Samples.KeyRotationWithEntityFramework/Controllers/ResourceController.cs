@@ -10,32 +10,25 @@ using static OpenIddict.Abstractions.OpenIddictConstants;
 namespace Samples.KeyRotationWithEntityFramework.Controllers;
 
 [Route("api")]
-public class ResourceController : Controller
+public class ResourceController(UserManager<ApplicationUser> userManager) : Controller
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-
-    public ResourceController(UserManager<ApplicationUser> userManager)
-    {
-        _userManager = userManager;
-    }
-
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [HttpGet("message")]
     public async Task<IActionResult> GetMessage()
     {
-        var user = await _userManager.FindByIdAsync(User.GetClaim(Claims.Subject));
-        if (user is null)
-        {
-            return Challenge(
-                authenticationSchemes: OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme,
-                properties: new AuthenticationProperties(new Dictionary<string, string>
-                {
-                    [OpenIddictValidationAspNetCoreConstants.Properties.Error] = Errors.InvalidToken,
-                    [OpenIddictValidationAspNetCoreConstants.Properties.ErrorDescription] =
-                        "The specified access token is bound to an account that no longer exists."
-                }));
-        }
+        var subject = User.GetClaim(Claims.Subject) ?? 
+                      throw new InvalidOperationException("Unable to get subject from ClaimsPrinciple");
+        var user = await userManager.FindByIdAsync(subject);
 
-        return Content($"{user.UserName} has been successfully authenticated.");
-}
+        if (user is not null) return Content($"{user.UserName} has been successfully authenticated.");
+            
+        return Challenge(
+            authenticationSchemes: OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme,
+            properties: new AuthenticationProperties(new Dictionary<string, string?>
+            {
+                [OpenIddictValidationAspNetCoreConstants.Properties.Error] = Errors.InvalidToken,
+                [OpenIddictValidationAspNetCoreConstants.Properties.ErrorDescription] =
+                    "The specified access token is bound to an account that no longer exists."
+            }));
+    }
 }
