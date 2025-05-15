@@ -85,9 +85,8 @@ public class Startup(IConfiguration configuration)
                 // the other flows if you need to support implicit, password or client credentials.
                 options.AllowAuthorizationCodeFlow();
 
-                // Register the signing and encryption credentials.
-                options.AddDevelopmentEncryptionCertificate()
-                       .AddDevelopmentSigningCertificate();
+                // Register the encryption credentials.
+                options.AddDevelopmentEncryptionCertificate();
 
                 // Register the ASP.NET Core host and configure the ASP.NET Core-specific options.
                 options.UseAspNetCore()
