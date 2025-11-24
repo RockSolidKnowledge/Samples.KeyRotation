@@ -1,4 +1,5 @@
 using Duende.IdentityModel;
+using IdentityExpress.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
@@ -31,7 +32,7 @@ public class Startup(IConfiguration configuration)
         services.AddDatabaseDeveloperPageExceptionFilter();
 
         // Register the Identity services.
-        services.AddIdentity<ApplicationUser, IdentityRole>()
+        services.AddIdentity<IdentityExpressUser, IdentityExpressRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders()
             .AddDefaultUI();
@@ -97,7 +98,7 @@ public class Startup(IConfiguration configuration)
                     .EnableStatusCodePagesIntegration();
 
                 // Adding Key Rotation component to OpenIddict instance
-                options.AddKeyRotation(krBuilder =>
+                options.AddRskKeyRotation(krBuilder =>
                 {
                     krBuilder.UseEntityFrameworkCore()
                         .AddKeyRotationDbContext(opt =>

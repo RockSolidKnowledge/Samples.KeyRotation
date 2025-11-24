@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using IdentityExpress.Identity;
 using Microsoft.AspNetCore.Identity;
 using OpenIddict.Abstractions;
 using Rsk.KeyRotation.EntityFramework;
@@ -89,12 +90,12 @@ public class Worker(IServiceProvider serviceProvider) : IHostedService
         }, "Password123!");
     }
 
-    private async Task CreateUserIfNotExists(IServiceScope scope, string userName, Action<ApplicationUser> userConfiguration, string userPassword)
+    private async Task CreateUserIfNotExists(IServiceScope scope, string userName, Action<IdentityExpressUser> userConfiguration, string userPassword)
     {
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityExpressUser>>();
         if (await userManager.FindByNameAsync(userName) == null)
         {
-            var user = new ApplicationUser();
+            var user = new IdentityExpressUser();
             userConfiguration(user);
             await userManager.CreateAsync(user, userPassword);
         }
