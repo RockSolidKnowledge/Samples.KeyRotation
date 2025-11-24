@@ -28,6 +28,9 @@ namespace Samples.KeyRotationWithEntityFramework.Migrations
         {
             migrationBuilder.DropForeignKey(name: OldForeignKeyId, table: OldKeyTableName);
             
+            migrationBuilder.DropPrimaryKey(name: $"PK_{OldKeySetTableName}", table: OldKeySetTableName);
+            migrationBuilder.DropPrimaryKey(name: $"PK_{OldKeyTableName}", table: OldKeyTableName);
+            
             migrationBuilder.RenameTable(name: OldKeyTableName, newName: NewKeyTableName);
             migrationBuilder.RenameColumn(name: OldKeyTableKeySetIdColumnName, table: NewKeyTableName, newName: NewKeyTableKeySetIdColumnName);
             migrationBuilder.RenameTable(name: OldKeySetTableName, newName: NewKeySetTableName);
@@ -52,6 +55,9 @@ namespace Samples.KeyRotationWithEntityFramework.Migrations
                                   WHERE KeySetId = '{NewKeySetId}';
                                   """);
             
+            migrationBuilder.AddPrimaryKey(name: $"PK_{NewKeySetTableName}", table: NewKeySetTableName, column: "KeySetId");
+            migrationBuilder.AddPrimaryKey(name: $"PK_{NewKeyTableName}", table: NewKeyTableName, column: "KeyId");
+            
             migrationBuilder.AddForeignKey(
                 name: NewForeignKeyId,
                 table: NewKeyTableName,
@@ -64,6 +70,8 @@ namespace Samples.KeyRotationWithEntityFramework.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(name: NewForeignKeyId, table: NewKeyTableName);
+            migrationBuilder.DropPrimaryKey(name: $"PK_{NewKeySetTableName}", table: NewKeySetTableName);
+            migrationBuilder.DropPrimaryKey(name: $"PK_{NewKeyTableName}", table: NewKeyTableName);
             
             migrationBuilder.RenameTable(name: NewKeyTableName, newName: OldKeyTableName);
             migrationBuilder.RenameColumn(name: NewKeyTableKeySetIdColumnName, table: OldKeyTableName, newName: OldKeyTableKeySetIdColumnName);
@@ -86,8 +94,11 @@ namespace Samples.KeyRotationWithEntityFramework.Migrations
             migrationBuilder.Sql($"""
                                   UPDATE [{OldKeyTableName}]
                                   SET KeyId = REPLACE(KeyId, '{NewKeySetId}.', '')
-                                  WHERE KeySetId = '{OldKeySetId}';
+                                  WHERE KetSetId = '{OldKeySetId}';
                                   """);
+            
+            migrationBuilder.AddPrimaryKey(name: $"PK_{OldKeySetTableName}", table: OldKeySetTableName, column: "KeySetId");
+            migrationBuilder.AddPrimaryKey(name: $"PK_{OldKeyTableName}", table: OldKeyTableName, column: "KeyId");
             
             migrationBuilder.AddForeignKey(
                 name: OldForeignKeyId,
