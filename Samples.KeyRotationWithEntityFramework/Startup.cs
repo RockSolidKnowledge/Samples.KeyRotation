@@ -104,14 +104,11 @@ public class Startup(IConfiguration configuration)
                         .AddKeyRotationDbContext(opt =>
                         {
                             var keyRotationDbConnectionString = Configuration.GetConnectionString("KeyRotationDb");
-                            opt.UseSqlServer(keyRotationDbConnectionString);
+                            opt.UseSqlServer(keyRotationDbConnectionString, conf => conf.MigrationsAssembly("Samples.KeyRotationWithEntityFramework"));
                         });
 
-                    krBuilder.ConfigureKeyRotation(conf =>
-                    {
-                        conf.Licensee = "DEMO";
-                        conf.LicenseKey = "***LicenseKey Here***";
-                    });
+                    var licenseKey = Configuration.GetConnectionString("LicenseKey") ?? throw new NullReferenceException("'LicenseKey' is null in configuration");
+                    krBuilder.AddLicense("DEMO", licenseKey);
                 });
             })
 
