@@ -22,6 +22,8 @@ public class Startup(IConfiguration configuration)
         {
             //Configure the database provider to use.
             options.UseSqlServer(openIddictDbConnectionString);
+            // options.UseMySQL(openIddictDbConnectionString);
+            // options.UseNpgsql(openIddictDbConnectionString);
 
             // Register the entity sets needed by OpenIddict.
             // Note: use the generic overload if you need
@@ -87,7 +89,9 @@ public class Startup(IConfiguration configuration)
                 options.AllowAuthorizationCodeFlow();
 
                 // Register the encryption credentials.
-                options.AddDevelopmentEncryptionCertificate();
+                // options
+                //     .AddDevelopmentSigningCertificate()
+                //     .AddDevelopmentEncryptionCertificate();
 
                 // Register the ASP.NET Core host and configure the ASP.NET Core-specific options.
                 options.UseAspNetCore()
@@ -105,10 +109,27 @@ public class Startup(IConfiguration configuration)
                         {
                             var keyRotationDbConnectionString = Configuration.GetConnectionString("KeyRotationDb");
                             opt.UseSqlServer(keyRotationDbConnectionString, conf => conf.MigrationsAssembly("Samples.KeyRotationWithEntityFramework"));
+                            // opt.UseMySQL(keyRotationDbConnectionString, conf => conf.MigrationsAssembly("Samples.KeyRotationWithEntityFramework"));
+                            // opt.UseNpgsql(keyRotationDbConnectionString, conf => conf.MigrationsAssembly("Samples.KeyRotationWithEntityFramework"));
                         });
+                
+                    var licenseKey = Configuration.GetValue<string>("LicenseKey") ?? throw new NullReferenceException("'LicenseKey' is null in configuration");
+                    krBuilder.AddLicense("DEMO", licenseKey)
+                        // .UseAesForEncryption()
+                        .ConfigureKeyRotation(cnf =>
+                        {
+                            var r = new Random();
+                            cnf.CheckInterval = r.Next(7195, 7205);
 
-                    var licenseKey = Configuration.GetConnectionString("LicenseKey") ?? throw new NullReferenceException("'LicenseKey' is null in configuration");
-                    krBuilder.AddLicense("DEMO", licenseKey);
+                            cnf.SigningKeyPublishTime = TimeSpan.FromHours(1);
+                            cnf.SigningKeyLifetime = TimeSpan.FromHours(6);
+                            cnf.SigningKeyRetirementTime = TimeSpan.FromHours(1);
+                            
+                            cnf.EncryptionKeyLifetime = TimeSpan.FromHours(12);
+                            cnf.EncryptionKeyRetirementTime = TimeSpan.FromHours(2);
+                            
+                            Console.WriteLine($"########### Check Interval {cnf.CheckInterval} seconds!");
+                        });
                 });
             })
 

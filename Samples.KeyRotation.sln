@@ -1,6 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.KeyRotationWithEntityFramework", "Samples.KeyRotationWithEntityFramework\Samples.KeyRotationWithEntityFramework.csproj", "{49D65D94-0698-4FAD-9736-F4FD0E1CC763}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenIddict", "OpenIddict", "{38E6F660-8C81-4139-A4CA-890401F8D4B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Open.IdentityServer", "Open.IdentityServer", "{1EA93F3F-83FF-436F-BC8A-F3206DBD88BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Duende.IdentityServer", "Duende.IdentityServer", "{6C46CFFF-D15F-46F9-BF90-EA2C17B103CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.KeyRotationWithEntityFramework", "OpenIddict\Samples.KeyRotationWithEntityFramework\Samples.KeyRotationWithEntityFramework.csproj", "{BA47499E-E442-49B8-A455-E9693BC5DF4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +14,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{49D65D94-0698-4FAD-9736-F4FD0E1CC763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49D65D94-0698-4FAD-9736-F4FD0E1CC763}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49D65D94-0698-4FAD-9736-F4FD0E1CC763}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49D65D94-0698-4FAD-9736-F4FD0E1CC763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA47499E-E442-49B8-A455-E9693BC5DF4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA47499E-E442-49B8-A455-E9693BC5DF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA47499E-E442-49B8-A455-E9693BC5DF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA47499E-E442-49B8-A455-E9693BC5DF4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BA47499E-E442-49B8-A455-E9693BC5DF4D} = {38E6F660-8C81-4139-A4CA-890401F8D4B8}
 	EndGlobalSection
 EndGlobal
