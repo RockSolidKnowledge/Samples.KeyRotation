@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Open.IdentityServer", "Open
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Duende.IdentityServer", "Duende.IdentityServer", "{6C46CFFF-D15F-46F9-BF90-EA2C17B103CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.KeyRotationWithEntityFramework", "OpenIddict\Samples.KeyRotationWithEntityFramework\Samples.KeyRotationWithEntityFramework.csproj", "{BA47499E-E442-49B8-A455-E9693BC5DF4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.KeyRotation.OpenIddict.EntityFramework", "OpenIddict\Samples.KeyRotation.OpenIddict.EntityFramework\Samples.KeyRotation.OpenIddict.EntityFramework.csproj", "{BA47499E-E442-49B8-A455-E9693BC5DF4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.KeyRotation.OpenIdentityServer.EntityFramework", "Open.IdentityServer\Samples.KeyRotation.OpenIdentityServer.EntityFramework\Samples.KeyRotation.OpenIdentityServer.EntityFramework.csproj", "{F0792299-FA73-4FC7-ABBE-2FC02545E4D9}"
 EndProject
