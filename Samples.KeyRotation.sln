@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Duende.IdentityServer", "Du
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.KeyRotationWithEntityFramework", "OpenIddict\Samples.KeyRotationWithEntityFramework\Samples.KeyRotationWithEntityFramework.csproj", "{BA47499E-E442-49B8-A455-E9693BC5DF4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.KeyRotation.OpenIdentityServer.EntityFramework", "Open.IdentityServer\Samples.KeyRotation.OpenIdentityServer.EntityFramework\Samples.KeyRotation.OpenIdentityServer.EntityFramework.csproj", "{F0792299-FA73-4FC7-ABBE-2FC02545E4D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,8 +20,13 @@ Global
 		{BA47499E-E442-49B8-A455-E9693BC5DF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA47499E-E442-49B8-A455-E9693BC5DF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA47499E-E442-49B8-A455-E9693BC5DF4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0792299-FA73-4FC7-ABBE-2FC02545E4D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0792299-FA73-4FC7-ABBE-2FC02545E4D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0792299-FA73-4FC7-ABBE-2FC02545E4D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0792299-FA73-4FC7-ABBE-2FC02545E4D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BA47499E-E442-49B8-A455-E9693BC5DF4D} = {38E6F660-8C81-4139-A4CA-890401F8D4B8}
+		{F0792299-FA73-4FC7-ABBE-2FC02545E4D9} = {1EA93F3F-83FF-436F-BC8A-F3206DBD88BC}
 	EndGlobalSection
 EndGlobal
