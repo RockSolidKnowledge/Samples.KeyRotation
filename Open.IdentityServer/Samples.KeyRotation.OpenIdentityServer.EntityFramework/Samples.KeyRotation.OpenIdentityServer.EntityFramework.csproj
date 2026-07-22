@@ -12,8 +12,8 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.*"/>
         <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.3" />
         
-        <PackageReference Include="Rsk.KeyRotation.OpenIdentityServer" Version="3.0.0-local" />
-        <PackageReference Include="Rsk.KeyRotation.EntityFrameworkCore" Version="3.0.0-local" />
+        <PackageReference Include="Rsk.KeyRotation.OpenIdentityServer" Version="3.0.*" />
+        <PackageReference Include="Rsk.KeyRotation.EntityFrameworkCore" Version="3.0.*" />
     </ItemGroup>
 
     <ItemGroup>
