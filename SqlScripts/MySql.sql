@@ -1,24 +1,22 @@
 ﻿START TRANSACTION;
 
-ALTER DATABASE CHARACTER SET utf8mb4;
+CREATE TABLE `RskSecurityKeySets` (
+    `KeySetId` varchar(255) NOT NULL,
+    `ConcurrencyTimestamp` datetime(6) NOT NULL,
+     PRIMARY KEY (`KeySetId`)
+);
 
-CREATE TABLE `SigningKeySets` (
-    `KeySetId` varchar(95) CHARACTER SET utf8mb4 NOT NULL,
-    `Timestamp` datetime(6) NOT NULL,
-    CONSTRAINT `PK_SigningKeySets` PRIMARY KEY (`KeySetId`)
-) CHARACTER SET=utf8mb4;
+CREATE TABLE `RskSecurityKeys` (
+    `KeyId` varchar(255) NOT NULL,
+    `KeySetId` varchar(255) NULL,
+    `ActiveFrom` datetime NOT NULL,
+    `ActiveTo` datetime NOT NULL,
+    `KeyMaterial` longtext NOT NULL,
+     PRIMARY KEY (`KeyId`),
+     CONSTRAINT `FK_RskSecurityKeys_RskSecurityKeySets_KeySetId` FOREIGN KEY (`KeySetId`) REFERENCES `RskSecurityKeySets` (`KeySetId`)
+);
 
-CREATE TABLE `SigningKeys` (
-    `KeyId` varchar(95) CHARACTER SET utf8mb4 NOT NULL,
-    `KetSetId` varchar(95) CHARACTER SET utf8mb4 NULL,
-    `ActiveFrom` datetime(6) NOT NULL,
-    `ActiveTo` datetime(6) NOT NULL,
-    `KeyMaterial` longtext CHARACTER SET utf8mb4 NOT NULL,
-    CONSTRAINT `PK_SigningKeys` PRIMARY KEY (`KeyId`),
-    CONSTRAINT `FK_SigningKeys_SigningKeySets_KetSetId` FOREIGN KEY (`KetSetId`) REFERENCES `SigningKeySets` (`KeySetId`)
-) CHARACTER SET=utf8mb4;
-
-CREATE INDEX `IX_SigningKeys_KetSetId` ON `SigningKeys` (`KetSetId`);
+CREATE INDEX `IX_RskSecurityKeys_KeySetId` ON `RskSecurityKeys` (`KeySetId`);
 
 COMMIT;
 
