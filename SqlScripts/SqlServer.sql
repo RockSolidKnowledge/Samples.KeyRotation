@@ -1,25 +1,27 @@
 ﻿BEGIN TRANSACTION;
 GO
 
-CREATE TABLE [SigningKeySets] (
-    [KeySetId] nvarchar(450) NOT NULL,
-    [Timestamp] datetime2 NOT NULL,
-    CONSTRAINT [PK_SigningKeySets] PRIMARY KEY ([KeySetId])
+CREATE TABLE [RskSecurityKeySets]
+(
+    [KeySetId]             nvarchar(450) NOT NULL,
+    [ConcurrencyTimestamp] datetime2     NOT NULL,
+    CONSTRAINT [PK_RskSecurityKeySets] PRIMARY KEY ([KeySetId])
 );
 GO
 
-CREATE TABLE [SigningKeys] (
-    [KeyId] nvarchar(450) NOT NULL,
-    [KetSetId] nvarchar(450) NULL,
-    [ActiveFrom] datetime2 NOT NULL,
-    [ActiveTo] datetime2 NOT NULL,
-    [KeyMaterial] nvarchar(max) NOT NULL,
-    CONSTRAINT [PK_SigningKeys] PRIMARY KEY ([KeyId]),
-    CONSTRAINT [FK_SigningKeys_SigningKeySets_KetSetId] FOREIGN KEY ([KetSetId]) REFERENCES [SigningKeySets] ([KeySetId])
+CREATE TABLE [RskSecurityKeys]
+(
+    [KeyId]       nvarchar(450)  NOT NULL,
+    [KeySetId]    nvarchar(450)  NULL,
+    [ActiveFrom]  datetimeoffset NOT NULL,
+    [ActiveTo]    datetimeoffset NOT NULL,
+    [KeyMaterial] nvarchar(max)  NOT NULL,
+    CONSTRAINT [PK_RskSecurityKeys] PRIMARY KEY ([KeyId]),
+    CONSTRAINT [FK_RskSecurityKeys_RskSecurityKeySets_KeySetId] FOREIGN KEY ([KeySetId]) REFERENCES [RskSecurityKeySets] ([KeySetId])
 );
 GO
 
-CREATE INDEX [IX_SigningKeys_KetSetId] ON [SigningKeys] ([KetSetId]);
+CREATE INDEX [IX_RskSecurityKeys_KeySetId] ON [RskSecurityKeys] ([KeySetId]);
 GO
 
 COMMIT;
